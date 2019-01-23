@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: node-app
+ labels:
+   app: node-app
+   version: v2
+spec:
+ ports:
+ - port: 9080
+   name: http
+ selector:
+   app: node-app
+   version: v2
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: node-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node-app
+        version: v2
+    spec:
+      containers:
+      - image: osmsnbey/node-ingress:v2
+        imagePullPolicy: IfNotPresent
+        name: node-app
+        ports:
+        - containerPort: 9080
+---

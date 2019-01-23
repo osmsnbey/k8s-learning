@@ -1,0 +1,20 @@
+##################################################################################################
+# Ingress Routing
+##################################################################################################
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: test-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /foo
+        backend:
+         serviceName: node-app
+         servicePort: 9080
+      - path: /helloworld
+        backend:
+          serviceName: node-app
+          servicePort: 9080 
+---
